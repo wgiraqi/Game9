@@ -1,0 +1,2740 @@
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">  
+<meta name="theme-color" content="#0b1020">  
+<title>✨ مختبر العناصر</title>  <style>  
+:root{  
+  --bg:#080d1a;  
+  --panel:#101827;  
+  --card:#182338;  
+  --card2:#202d46;  
+  --text:#f8fafc;  
+  --muted:#94a3b8;  
+  --line:#334155;  
+  --accent:#7c3aed;  
+  --accent2:#06b6d4;  
+  --gold:#fbbf24;  
+  --danger:#ef4444;  
+  --success:#22c55e;  
+  --shadow:0 10px 30px rgba(0,0,0,.25);  
+}  
+  
+[data-theme="light"]{  
+  --bg:#eef2ff;  
+  --panel:#ffffff;  
+  --card:#e2e8f0;  
+  --card2:#cbd5e1;  
+  --text:#0f172a;  
+  --muted:#64748b;  
+  --line:#cbd5e1;  
+  --accent:#4f46e5;  
+  --accent2:#0891b2;  
+  --gold:#b45309;  
+  --danger:#dc2626;  
+  --success:#16a34a;  
+  --shadow:0 10px 30px rgba(15,23,42,.12);  
+}  
+  
+*{  
+  box-sizing:border-box;  
+  margin:0;  
+  padding:0;  
+  font-family:Arial,"Tahoma",sans-serif;  
+  -webkit-tap-highlight-color:transparent;  
+}  
+  
+html,body{  
+  width:100%;  
+  height:100%;  
+  overflow:hidden;  
+}  
+  
+body{  
+  background:var(--bg);  
+  color:var(--text);  
+}  
+  
+button,input{  
+  font:inherit;  
+}  
+  
+button{  
+  border:0;  
+  cursor:pointer;  
+  color:inherit;  
+}  
+  
+.app{  
+  width:100%;  
+  height:100%;  
+  display:flex;  
+  flex-direction:column;  
+}  
+  
+/* ================= HEADER ================= */  
+  
+header{  
+  height:62px;  
+  flex-shrink:0;  
+  background:var(--panel);  
+  border-bottom:1px solid var(--line);  
+  display:flex;  
+  align-items:center;  
+  gap:8px;  
+  padding:8px 12px;  
+  z-index:100;  
+}  
+  
+.logo{  
+  font-size:18px;  
+  font-weight:900;  
+  color:var(--gold);  
+  white-space:nowrap;  
+}  
+  
+.progressBox{  
+  margin-right:auto;  
+  display:flex;  
+  align-items:center;  
+  gap:8px;  
+  background:rgba(124,58,237,.12);  
+  border:1px solid var(--accent);  
+  padding:7px 11px;  
+  border-radius:20px;  
+  font-size:12px;  
+  font-weight:bold;  
+}  
+  
+.progressMini{  
+  width:55px;  
+  height:6px;  
+  background:var(--bg);  
+  border-radius:20px;  
+  overflow:hidden;  
+}  
+  
+.progressMini i{  
+  display:block;  
+  height:100%;  
+  width:0;  
+  background:linear-gradient(90deg,var(--accent),var(--accent2));  
+}  
+  
+.headerBtn{  
+  width:40px;  
+  height:40px;  
+  border-radius:11px;  
+  background:var(--card);  
+  border:1px solid var(--line);  
+  font-size:18px;  
+}  
+  
+.headerBtn:active{  
+  transform:scale(.94);  
+}  
+  
+/* ================= PAGES ================= */  
+  
+.page{  
+  display:none;  
+  flex:1;  
+  min-height:0;  
+}  
+  
+.page.active{  
+  display:flex;  
+}  
+  
+/* ================= LAB ================= */  
+  
+#labPage{  
+  flex-direction:column;  
+  overflow:hidden;  
+}  
+  
+.labTop{  
+  padding:14px;  
+  background:  
+    radial-gradient(circle at 50% 0%,rgba(124,58,237,.18),transparent 45%),  
+    var(--bg);  
+  border-bottom:1px solid var(--line);  
+}  
+  
+.labTitle{  
+  font-size:22px;  
+  font-weight:900;  
+}  
+  
+.labSub{  
+  color:var(--muted);  
+  font-size:12px;  
+  margin-top:5px;  
+}  
+  
+.combineArea{  
+  padding:14px;  
+  display:flex;  
+  flex-direction:column;  
+  gap:10px;  
+  background:var(--panel);  
+  border-bottom:1px solid var(--line);  
+}  
+  
+.slotArea{  
+  display:flex;  
+  justify-content:center;  
+  align-items:center;  
+  gap:12px;  
+}  
+  
+.slot{  
+  width:105px;  
+  height:90px;  
+  border:2px dashed var(--line);  
+  background:var(--bg);  
+  border-radius:18px;  
+  display:flex;  
+  flex-direction:column;  
+  justify-content:center;  
+  align-items:center;  
+  position:relative;  
+}  
+  
+.slot.filled{  
+  border-style:solid;  
+  border-color:var(--accent);  
+  background:rgba(124,58,237,.1);  
+}  
+  
+.slotIcon{  
+  font-size:34px;  
+}  
+  
+.slotName{  
+  font-size:11px;  
+  font-weight:bold;  
+  margin-top:3px;  
+  text-align:center;  
+}  
+  
+.slotX{  
+  position:absolute;  
+  left:-7px;  
+  top:-7px;  
+  width:21px;  
+  height:21px;  
+  border-radius:50%;  
+  background:var(--danger);  
+  color:white;  
+  font-size:12px;  
+}  
+  
+.plus{  
+  font-size:25px;  
+  color:var(--muted);  
+}  
+  
+.combineBtn{  
+  height:48px;  
+  border-radius:14px;  
+  background:linear-gradient(135deg,var(--accent),var(--accent2));  
+  color:white;  
+  font-weight:900;  
+  box-shadow:0 8px 20px rgba(124,58,237,.25);  
+}  
+  
+.combineBtn:active{  
+  transform:scale(.98);  
+}  
+  
+.searchBox{  
+  padding:10px 12px;  
+  background:var(--panel);  
+}  
+  
+.search{  
+  width:100%;  
+  height:44px;  
+  border:1px solid var(--line);  
+  background:var(--bg);  
+  color:var(--text);  
+  border-radius:13px;  
+  padding:0 13px;  
+  outline:none;  
+}  
+  
+.search:focus{  
+  border-color:var(--accent);  
+}  
+  
+.filters{  
+  display:flex;  
+  gap:7px;  
+  overflow-x:auto;  
+  padding:0 12px 10px;  
+  background:var(--panel);  
+  scrollbar-width:none;  
+}  
+  
+.filters::-webkit-scrollbar{  
+  display:none;  
+}  
+  
+.filter{  
+  flex-shrink:0;  
+  padding:8px 12px;  
+  border-radius:10px;  
+  background:var(--card);  
+  color:var(--text);  
+  font-size:11px;  
+  font-weight:bold;  
+}  
+  
+.filter.active{  
+  background:var(--accent);  
+  color:#fff;  
+}  
+  
+.inventory{  
+  flex:1;  
+  min-height:0;  
+  overflow:auto;  
+  padding:10px 12px 20px;  
+  background:var(--panel);  
+}  
+  
+.grid{  
+  display:grid;  
+  grid-template-columns:repeat(auto-fill,minmax(76px,1fr));  
+  gap:8px;  
+}  
+  
+.elementCard{  
+  min-height:80px;  
+  border:1px solid var(--line);  
+  border-radius:13px;  
+  background:var(--card);  
+  display:flex;  
+  flex-direction:column;  
+  justify-content:center;  
+  align-items:center;  
+  gap:4px;  
+  transition:.15s;  
+}  
+  
+.elementCard:active{  
+  transform:scale(.95);  
+}  
+  
+.elementCard .icon{  
+  font-size:27px;  
+}  
+  
+.elementCard .name{  
+  font-size:10px;  
+  font-weight:bold;  
+  text-align:center;  
+  padding:0 3px;  
+}  
+  
+.elementCard .cat{  
+  font-size:8px;  
+  color:var(--muted);  
+}  
+  
+.empty{  
+  text-align:center;  
+  color:var(--muted);  
+  padding:40px 15px;  
+}  
+  
+/* ================= MAP PAGE ================= */  
+  
+#mapPage{  
+  position:relative;  
+  flex-direction:column;  
+  overflow:hidden;  
+  background:var(--bg);  
+}  
+  
+.mapHeader{  
+  height:52px;  
+  flex-shrink:0;  
+  display:flex;  
+  align-items:center;  
+  gap:7px;  
+  padding:6px 9px;  
+  background:var(--panel);  
+  border-bottom:1px solid var(--line);  
+  z-index:30;  
+}  
+  
+.backBtn{  
+  height:38px;  
+  padding:0 13px;  
+  border-radius:10px;  
+  background:var(--card);  
+  border:1px solid var(--line);  
+  font-weight:bold;  
+}  
+  
+.mapTitle{  
+  font-weight:900;  
+  margin-right:3px;  
+}  
+  
+.mapCounter{  
+  margin-right:auto;  
+  color:var(--muted);  
+  font-size:11px;  
+}  
+  
+.mapOption{  
+  width:38px;  
+  height:38px;  
+  border-radius:10px;  
+  background:var(--card);  
+  border:1px solid var(--line);  
+}  
+  
+#mapViewport{  
+  flex:1;  
+  min-height:0;  
+  position:relative;  
+  overflow:hidden;  
+  touch-action:none;  
+  background:  
+    radial-gradient(circle at center,rgba(124,58,237,.11),transparent 38%),  
+    var(--bg);  
+}  
+  
+#world{  
+  position:absolute;  
+  width:3600px;  
+  height:2600px;  
+  left:0;  
+  top:0;  
+  transform-origin:0 0;  
+}  
+  
+#worldSvg{  
+  position:absolute;  
+  left:0;  
+  top:0;  
+  width:3600px;  
+  height:2600px;  
+  pointer-events:none;  
+  overflow:visible;  
+}  
+  
+.mapNode{  
+  position:absolute;  
+  width:116px;  
+  min-height:84px;  
+  padding:6px;  
+  border-radius:16px;  
+  background:var(--card);  
+  border:1px solid var(--line);  
+  box-shadow:var(--shadow);  
+  display:flex;  
+  flex-direction:column;  
+  align-items:center;  
+  justify-content:center;  
+  gap:2px;  
+  z-index:3;  
+  transition:.15s;  
+}  
+  
+.mapNode:active{  
+  transform:scale(.95);  
+}  
+  
+.mapNode.basic{  
+  border-color:var(--gold);  
+}  
+  
+.mapNode.discovered{  
+  border-color:var(--accent2);  
+  box-shadow:  
+    0 0 0 1px rgba(6,182,212,.1),  
+    0 8px 22px rgba(0,0,0,.2);  
+}  
+  
+.mapNode.unknown{  
+  opacity:.48;  
+  filter:grayscale(1);  
+}  
+  
+.mapNode .mapIcon{  
+  font-size:28px;  
+}  
+  
+.mapNode .mapName{  
+  font-size:11px;  
+  font-weight:900;  
+  text-align:center;  
+}  
+  
+.mapNode .mapDepth{  
+  font-size:8px;  
+  color:var(--muted);  
+}  
+  
+.edge{  
+  stroke:var(--line);  
+  stroke-width:3;  
+  opacity:.35;  
+}  
+  
+.edge.known{  
+  stroke:var(--accent2);  
+  opacity:.75;  
+}  
+  
+.edge.partial{  
+  stroke:var(--accent);  
+  opacity:.45;  
+}  
+  
+.mapControls{  
+  position:absolute;  
+  right:10px;  
+  top:10px;  
+  display:flex;  
+  flex-direction:column;  
+  gap:7px;  
+  z-index:20;  
+}  
+  
+.mapControls button{  
+  width:42px;  
+  height:42px;  
+  border-radius:11px;  
+  background:var(--panel);  
+  border:1px solid var(--line);  
+  font-size:18px;  
+  box-shadow:var(--shadow);  
+}  
+  
+.mapLegend{  
+  position:absolute;  
+  left:10px;  
+  top:10px;  
+  z-index:20;  
+  background:rgba(15,23,42,.75);  
+  backdrop-filter:blur(8px);  
+  color:white;  
+  border:1px solid rgba(255,255,255,.12);  
+  padding:9px 11px;  
+  border-radius:11px;  
+  font-size:10px;  
+}  
+  
+[data-theme="light"] .mapLegend{  
+  background:rgba(255,255,255,.82);  
+  color:var(--text);  
+}  
+  
+.mapHint{  
+  position:absolute;  
+  left:50%;  
+  bottom:12px;  
+  transform:translateX(-50%);  
+  z-index:20;  
+  background:rgba(15,23,42,.8);  
+  color:white;  
+  padding:8px 13px;  
+  border-radius:20px;  
+  font-size:10px;  
+  pointer-events:none;  
+  white-space:nowrap;  
+  transition:.3s;  
+}  
+  
+[data-theme="light"] .mapHint{  
+  background:rgba(255,255,255,.85);  
+  color:var(--text);  
+}  
+  
+/* ================= AD CONTAINER ================= */  
+  
+.adContainer{  
+  width:100%;  
+  flex-shrink:0;  
+  background:var(--panel);  
+  border-top:1px solid var(--line);  
+  display:flex;  
+  justify-content:center;  
+  align-items:center;  
+  padding:4px 0;  
+  z-index:100;  
+}  
+  
+/* ================= MODAL ================= */  
+  
+.modal{  
+  position:fixed;  
+  inset:0;  
+  background:rgba(0,0,0,.72);  
+  backdrop-filter:blur(4px);  
+  display:none;  
+  align-items:center;  
+  justify-content:center;  
+  z-index:500;  
+  padding:15px;  
+}  
+  
+.modal.show{  
+  display:flex;  
+}  
+  
+.modalBox{  
+  width:min(94%,500px);  
+  max-height:88vh;  
+  overflow:auto;  
+  background:var(--panel);  
+  border:1px solid var(--line);  
+  border-radius:22px;  
+  padding:20px;  
+  position:relative;  
+  box-shadow:0 25px 70px rgba(0,0,0,.4);  
+}  
+  
+.close{  
+  position:absolute;  
+  left:12px;  
+  top:8px;  
+  width:35px;  
+  height:35px;  
+  background:transparent;  
+  color:var(--muted);  
+  font-size:28px;  
+}  
+  
+.detailIcon{  
+  font-size:65px;  
+  text-align:center;  
+  margin-top:8px;  
+}  
+  
+.detailName{  
+  text-align:center;  
+  font-size:23px;  
+  font-weight:900;  
+}  
+  
+.detailCat{  
+  text-align:center;  
+  color:var(--muted);  
+  font-size:12px;  
+  margin-top:5px;  
+}  
+  
+.detailActions{  
+  display:flex;  
+  gap:7px;  
+  margin-top:15px;  
+}  
+  
+.detailAction{  
+  flex:1;  
+  padding:11px;  
+  border-radius:11px;  
+  background:var(--card);  
+  border:1px solid var(--line);  
+  font-size:11px;  
+  font-weight:bold;  
+}  
+  
+.recipeBox{  
+  margin-top:14px;  
+  background:var(--bg);  
+  border:1px solid var(--line);  
+  border-radius:14px;  
+  padding:12px;  
+}  
+  
+.recipeTitle{  
+  font-weight:900;  
+  font-size:13px;  
+  margin-bottom:8px;  
+}  
+  
+.recipe{  
+  padding:9px 4px;  
+  border-bottom:1px solid var(--line);  
+  font-size:11px;  
+  text-align:center;  
+}  
+  
+.recipe:last-child{  
+  border-bottom:0;  
+}  
+  
+.recipe b{  
+  color:var(--accent2);  
+}  
+  
+/* ================= TOAST ================= */  
+  
+.toast{  
+  position:fixed;  
+  left:50%;  
+  bottom:70px;  
+  transform:translate(-50%,20px);  
+  background:#111827;  
+  color:#fff;  
+  padding:10px 17px;  
+  border-radius:25px;  
+  font-size:12px;  
+  font-weight:bold;  
+  opacity:0;  
+  pointer-events:none;  
+  z-index:1000;  
+  transition:.25s;  
+  box-shadow:0 8px 25px rgba(0,0,0,.3);  
+  white-space:nowrap;  
+}  
+  
+.toast.show{  
+  opacity:1;  
+  transform:translate(-50%,0);  
+}  
+  
+/* ================= DESKTOP ================= */  
+  
+@media(min-width:800px){  
+  
+  header{  
+    padding-left:20px;  
+    padding-right:20px;  
+  }  
+  
+  #labPage{  
+    max-width:1100px;  
+    width:100%;  
+    margin:auto;  
+    border-left:1px solid var(--line);  
+    border-right:1px solid var(--line);  
+  }  
+  
+  .grid{  
+    grid-template-columns:repeat(auto-fill,minmax(90px,1fr));  
+  }  
+  
+  .elementCard{  
+    min-height:90px;  
+  }  
+}  
+  
+/* ================= SMALL MOBILE ================= */  
+  
+@media(max-width:430px){  
+  
+  header{  
+    height:57px;  
+    padding:7px 8px;  
+  }  
+  
+  .logo{  
+    font-size:14px;  
+  }  
+  
+  .progressBox{  
+    font-size:10px;  
+    padding:6px 8px;  
+  }  
+  
+  .progressMini{  
+    width:35px;  
+  }  
+  
+  .headerBtn{  
+    width:36px;  
+    height:36px;  
+  }  
+  
+  .slot{  
+    width:91px;  
+    height:82px;  
+  }  
+  
+  .slotIcon{  
+    font-size:30px;  
+  }  
+  
+  .grid{  
+    grid-template-columns:repeat(4,1fr);  
+    gap:6px;  
+  }  
+  
+  .elementCard{  
+    min-height:73px;  
+  }  
+  
+  .elementCard .icon{  
+    font-size:23px;  
+  }  
+  
+  .elementCard .name{  
+    font-size:9px;  
+  }  
+  
+  .mapLegend{  
+    display:none;  
+  }  
+  
+  .mapNode{  
+    width:105px;  
+    min-height:78px;  
+  }  
+}  
+</style>  </head>  <body data-theme="dark">  <div class="app">  <header>    <div class="logo">✨ مختبر العناصر</div>    <div class="progressBox">  
+    <span>  
+      <span id="discoveredCount">4</span>/<span id="totalCount">200</span>  
+    </span>  <div class="progressMini">  
+  <i id="progressBar"></i>  
+</div>  
+
+<span id="progressPercent">2%</span>
+
+  </div>  <button class="headerBtn" id="mapOpenBtn" title="الخريطة">🗺️</button>
+<button class="headerBtn" id="themeBtn" title="الوضع">🌙</button>
+<button class="headerBtn" id="resetBtn" title="إعادة ضبط">↻</button>
+
+</header>  <!-- ================= LAB PAGE ================= -->  <section class="page active" id="labPage">    <div class="labTop">  <div class="labTitle">🧪 مختبر العناصر</div>  
+
+<div class="labSub">  
+  ادمج عنصرين لاكتشاف عناصر جديدة وفتح عالمك الخاص.  
+</div>
+
+  </div>    <div class="combineArea">  <div class="slotArea">  
+
+  <div class="slot" id="slot1">  
+    <span style="font-size:28px;color:var(--muted)">+</span>  
+    <small style="color:var(--muted)">العنصر الأول</small>  
+  </div>  
+
+  <div class="plus">＋</div>  
+
+  <div class="slot" id="slot2">  
+    <span style="font-size:28px;color:var(--muted)">+</span>  
+    <small style="color:var(--muted)">العنصر الثاني</small>  
+  </div>  
+
+</div>  
+
+<button class="combineBtn" id="combineBtn">  
+  ✨ دمج العنصرين  
+</button>
+
+  </div>    <div class="searchBox">  <input  
+  class="search"  
+  id="search"  
+  autocomplete="off"  
+  placeholder="🔍 ابحث عن عنصر..."  
+>
+
+  </div>    <div class="filters" id="filters"></div>    <div class="inventory">  <div class="grid" id="grid"></div>  
+
+<div class="empty" id="empty" style="display:none">  
+  🔍 لم يتم العثور على عنصر.  
+</div>
+
+  </div>  </section>  <!-- ================= MAP PAGE ================= -->  <section class="page" id="mapPage">    <div class="mapHeader">  <button class="backBtn" id="backBtn">  
+  ← المختبر  
+</button>  
+
+<div class="mapTitle">  
+  🗺️ خريطة الاكتشافات  
+</div>  
+
+<div class="mapCounter">  
+  <span id="mapDiscovered">4</span> مكتشف  
+</div>  
+
+<button class="mapOption" id="showDiscovered" title="المكتشفات">  
+  👁️  
+</button>
+
+  </div>    <div id="mapViewport">  <div class="mapLegend">  
+  🔵 مكتشف &nbsp; • &nbsp; ⚪ مجهول  
+</div>  
+
+<div class="mapControls">  
+
+  <button id="zoomIn">+</button>  
+
+  <button id="zoomOut">−</button>  
+
+  <button id="centerMap">⌾</button>  
+
+  <button id="zoomReset">1:1</button>  
+
+</div>  
+
+
+<div class="mapHint" id="mapHint">  
+  اسحب الخريطة وحركها بإصبعك • اضغط على أي عنصر  
+</div>  
+
+
+<div id="world">  
+
+  <svg id="worldSvg"></svg>  
+
+</div>
+
+  </div>  </section>  <!-- ================= AD SECTION ================= -->  <div class="adContainer">  
+  <script type="text/javascript">  
+    atOptions = {  
+      'key' : '7b6a8dee2f1ae055b1a067bd530ba2a8',  
+      'format' : 'iframe',  
+      'height' : 50,  
+      'width' : 320,  
+      'params' : {}  
+    };  
+  </script>  
+  <script type="text/javascript" src="https://www.highrevenueformat.com/7b6a8dee2f1ae055b1a067bd530ba2a8/invoke.js"></script>  
+</div>  </div>  <!-- ================= DETAIL MODAL ================= -->  <div class="modal" id="modal">    <div class="modalBox">  <button class="close" id="closeModal">×</button>  
+
+<div class="detailIcon" id="detailIcon">❓</div>  
+
+<div class="detailName" id="detailName">  
+  عنصر  
+</div>  
+
+<div class="detailCat" id="detailCat">  
+  —  
+</div>  
+
+<div class="detailActions">  
+
+  <button class="detailAction" id="useDetail">  
+    🧪 استخدام للدمج  
+  </button>  
+
+  <button class="detailAction" id="mapDetail">  
+    🗺️ الخريطة  
+  </button>  
+
+</div>  
+
+<div class="recipeBox">  
+
+  <div class="recipeTitle">  
+    🧪 طرق صناعة هذا العنصر  
+  </div>  
+
+  <div id="recipes"></div>  
+
+</div>
+
+  </div>  </div>  <div class="toast" id="toast"></div>  <script>  
+  
+/* =========================================================  
+   DATA  
+========================================================= */  
+  
+const categories = [  
+  "الكل",  
+  "أساسي",  
+  "طبيعة",  
+  "طقس",  
+  "مواد",  
+  "طعام",  
+  "حيوانات",  
+  "حياة",  
+  "تقنية",  
+  "فضاء",  
+  "خيال"  
+];  
+  
+  
+const DATA = [  
+  
+["fire","نار","🔥","أساسي"],  
+["water","ماء","💧","أساسي"],  
+["earth","أرض","🌍","أساسي"],  
+["air","هواء","💨","أساسي"],  
+  
+["steam","بخار","♨️","طقس"],  
+["mud","طين","🟤","طبيعة"],  
+["lava","حمم","🌋","طبيعة"],  
+["energy","طاقة","⚡","أساسي"],  
+["rain","مطر","🌧️","طقس"],  
+["stone","حجر","🪨","مواد"],  
+["metal","معدن","⚙️","مواد"],  
+["sand","رمل","🏖️","طبيعة"],  
+["glass","زجاج","🪟","مواد"],  
+["heat","حرارة","♨️","أساسي"],  
+["sea","بحر","🌊","طبيعة"],  
+["ocean","محيط","🌊","طبيعة"],  
+["cloud","سحاب","☁️","طقس"],  
+["storm","عاصفة","⛈️","طقس"],  
+["obsidian","حجر بركاني","🖤","مواد"],  
+["brick","طوب","🧱","مواد"],  
+["pressure","ضغط","🏋️","أساسي"],  
+["volcano","بركان","🌋","طبيعة"],  
+["ice","جليد","🧊","طقس"],  
+["snow","ثلج","❄️","طقس"],  
+["blizzard","عاصفة ثلجية","🌨️","طقس"],  
+  
+["wheat","قمح","🌾","طعام"],  
+["flour","دقيق","🌾","طعام"],  
+["dough","عجين","🥖","طعام"],  
+["bread","خبز","🍞","طعام"],  
+["toast","توست","🍞","طعام"],  
+["cheese","جبن","🧀","طعام"],  
+["cow","بقرة","🐄","حيوانات"],  
+["milk","حليب","🥛","طعام"],  
+["meat","لحم","🥩","طعام"],  
+["steak","ستيك","🥩","طعام"],  
+["burger","برجر","🍔","طعام"],  
+["pizza","بيتزا","🍕","طعام"],  
+["hotdog","هوت دوغ","🌭","طعام"],  
+["animal","حيوان","🐾","حيوانات"],  
+["worm","دودة","🪱","حيوانات"],  
+["bird","طائر","🐦","حيوانات"],  
+["duck","بطة","🦆","حيوانات"],  
+["fish","سمكة","🐟","حيوانات"],  
+["shark","قرش","🦈","حيوانات"],  
+["octopus","أخطبوط","🐙","حيوانات"],  
+["frog","ضفدع","🐸","حيوانات"],  
+["snake","ثعبان","🐍","حيوانات"],  
+["scorpion","عقرب","🦂","حيوانات"],  
+["bee","نحلة","🐝","حيوانات"],  
+["honey","عسل","🍯","طعام"],  
+["plant","نبات","🪴","طبيعة"],  
+["flower","زهرة","🌸","طبيعة"],  
+["tree","شجرة","🌳","طبيعة"],  
+["forest","غابة","🌲","طبيعة"],  
+["wood","خشب","🪵","مواد"],  
+["paper","ورق","📄","مواد"],  
+["book","كتاب","📖","حياة"],  
+["library","مكتبة","📚","حياة"],  
+["garden","حديقة","🏡","طبيعة"],  
+["park","منتزه","🏞️","طبيعة"],  
+["coal","فحم","⚫","مواد"],  
+["diamond","ألماس","💎","مواد"],  
+["gold","ذهب","🪙","مواد"],  
+["jewelry","مجوهرات","💍","مواد"],  
+["tool","أداة","🛠️","مواد"],  
+["hammer","مطرقة","🔨","مواد"],  
+["wall","جدار","🧱","مواد"],  
+["house","بيت","🏠","حياة"],  
+["village","قرية","🏘️","حياة"],  
+["city","مدينة","🏙️","حياة"],  
+["metropolis","عاصمة","🌆","حياة"],  
+["castle","قلعة","🏰","خيال"],  
+["sword","سيف","⚔️","خيال"],  
+["warrior","محارب","🛡️","حياة"],  
+["knight","فارس","♞","حياة"],  
+["horse","حصان","🐎","حيوانات"],  
+["unicorn","وحيد القرن","🦄","خيال"],  
+["dragon","تنين","🐉","خيال"],  
+["phoenix","عنقاء","🔥","خيال"],  
+["human","إنسان","👤","حياة"],  
+["man","رجل","👨","حياة"],  
+["woman","امرأة","👩","حياة"],  
+["family","عائلة","👨‍👩‍👧","حياة"],  
+["farmer","مزارع","👨‍🌾","حياة"],  
+["field","حقل","🌾","طبيعة"],  
+["crop","محصول","🌽","طعام"],  
+["food","طعام","🍲","طعام"],  
+["doctor","طبيب","👨‍⚕️","حياة"],  
+["police","شرطي","👮","حياة"],  
+["firefighter","إطفائي","👨‍🚒","حياة"],  
+["love","حب","❤️","حياة"],  
+["marriage","زواج","💍","حياة"],  
+["family_home","منزل عائلي","🏡","حياة"],  
+["old_man","عجوز","👴","حياة"],  
+  
+["robot","روبوت","🤖","تقنية"],  
+["cyborg","سايبورغ","🦿","تقنية"],  
+["engine","محرك","⚙️","تقنية"],  
+["wheel","عجلة","🛞","مواد"],  
+["car","سيارة","🚗","تقنية"],  
+["racecar","سيارة سباق","🏎️","تقنية"],  
+["airplane","طائرة","✈️","تقنية"],  
+["rocket","صاروخ","🚀","تقنية"],  
+["computer","حاسوب","💻","تقنية"],  
+["internet","إنترنت","🌐","تقنية"],  
+["smartphone","هاتف ذكي","📱","تقنية"],  
+["screen","شاشة","🖥️","تقنية"],  
+["video_game","لعبة فيديو","🎮","تقنية"],  
+["gamer","لاعب","🎮","حياة"],  
+["battery","بطارية","🔋","تقنية"],  
+["charge","شحنة","⚡","تقنية"],  
+["wire","سلك","🔌","تقنية"],  
+["lightbulb","مصباح","💡","تقنية"],  
+["lamp","مصباح كهربائي","💡","تقنية"],  
+["telescope","تلسكوب","🔭","تقنية"],  
+["camera","كاميرا","📷","تقنية"],  
+["television","تلفاز","📺","تقنية"],  
+["radio","راديو","📻","تقنية"],  
+["factory","مصنع","🏭","تقنية"],  
+["drone","طائرة مسيرة","🚁","تقنية"],  
+["train","قطار","🚆","تقنية"],  
+["bus","حافلة","🚌","تقنية"],  
+["bicycle","دراجة","🚲","تقنية"],  
+["motorcycle","دراجة نارية","🏍️","تقنية"],  
+["road","طريق","🛣️","مواد"],  
+["bridge","جسر","🌉","مواد"],  
+["station","محطة","🚉","تقنية"],  
+  
+["space_station","محطة فضاء","🛰️","فضاء"],  
+["astronaut","رائد فضاء","👨‍🚀","فضاء"],  
+["planet","كوكب","🪐","فضاء"],  
+["solar_system","نظام شمسي","🌌","فضاء"],  
+["galaxy","مجرة","🌌","فضاء"],  
+["universe","كون","🌌","فضاء"],  
+["multiverse","أكوان متوازية","🌀","خيال"],  
+["sun","شمس","☀️","فضاء"],  
+["moon","قمر","🌙","فضاء"],  
+["eclipse","كسوف","🌒","فضاء"],  
+["meteor","نيزك","☄️","فضاء"],  
+["star","نجم","⭐","فضاء"],  
+["nebula","سديم","🌌","فضاء"],  
+["black_hole","ثقب أسود","⚫","فضاء"],  
+["alien","كائن فضائي","👽","خيال"],  
+["satellite","قمر صناعي","🛰️","تقنية"],  
+["spaceship","سفينة فضائية","🚀","فضاء"],  
+  
+["rainbow","قوس قزح","🌈","طقس"],  
+["lightning","برق","⚡","طقس"],  
+["plasma","بلازما","🔮","أساسي"],  
+["wind","رياح","🌬️","طقس"],  
+["tornado","إعصار","🌪️","طقس"],  
+["tsunami","تسونامي","🌊","طقس"],  
+["earthquake","زلزال","🏚️","طبيعة"],  
+["hydrogen","هيدروجين","🧪","أساسي"],  
+["ozone","أوزون","🌌","طبيعة"],  
+["fog","ضباب","🌫️","طقس"],  
+["smog","ضباب دخاني","🌫️","طقس"],  
+["desert","صحراء","🏜️","طبيعة"],  
+["oasis","واحة","🏝️","طبيعة"],  
+["beach","شاطئ","🏖️","طبيعة"],  
+["river","نهر","🏞️","طبيعة"],  
+["lake","بحيرة","🏞️","طبيعة"],  
+["waterfall","شلال","💦","طبيعة"],  
+["island","جزيرة","🏝️","طبيعة"],  
+["mountain","جبل","⛰️","طبيعة"],  
+["rainforest","غابة مطيرة","🌴","طبيعة"],  
+["pine_tree","صنوبر","🌲","طبيعة"],  
+["weed","عشب ضار","🌿","طبيعة"],  
+["fossil","أحفورة","🦴","طبيعة"],  
+["cave","كهف","🕳️","طبيعة"],  
+["campfire","موقد نار","🔥","طبيعة"],  
+["volcanic_glass","زجاج بركاني","🖤","مواد"],  
+  
+["apple","تفاحة","🍎","طعام"],  
+["fruit","فاكهة","🍊","طعام"],  
+["juice","عصير","🧃","طعام"],  
+["lemonade","ليموناضة","🥤","طعام"],  
+["jam","مربى","🍯","طعام"],  
+["ice_cream","آيس كريم","🍦","طعام"],  
+["salt","ملح","🧂","طعام"],  
+["sugar","سكر","🍬","طعام"],  
+["coffee","قهوة","☕","طعام"],  
+["tea","شاي","🍵","طعام"],  
+["chocolate","شوكولاتة","🍫","طعام"],  
+["cake","كعكة","🎂","طعام"],  
+["cookie","بسكويت","🍪","طعام"],  
+["sandwich","شطيرة","🥪","طعام"],  
+["sushi","سوشي","🍣","طعام"],  
+["bbq","شواء","🍖","طعام"],  
+  
+["wool","صوف","🧶","مواد"],  
+["cloth","قماش","🧵","مواد"],  
+["clothes","ملابس","👕","حياة"],  
+["mirror","مرآة","🪞","مواد"],  
+["statue","تمثال","🗿","مواد"],  
+["hourglass","ساعة رملية","⏳","تقنية"],  
+["clock","ساعة","⏰","تقنية"],  
+["watch","ساعة يد","⌚","تقنية"],  
+["sundial","ساعة شمسية","☀️","تقنية"],  
+["music","موسيقى","🎵","حياة"],  
+["musician","موسيقار","🎼","حياة"],  
+["artist","فنان","🎨","حياة"],  
+["canvas","لوحة","🖼️","مواد"],  
+["guitar","جيتار","🎸","مواد"],  
+["piano","بيانو","🎹","مواد"],  
+["oil","نفط","🛢️","مواد"],  
+["gasoline","بنزين","⛽","مواد"],  
+["motion","حركة","🏃","أساسي"],  
+["submarine","غواصة","🤿","تقنية"],  
+["boat","قارب","⛵","تقنية"],  
+["ship","سفينة","🚢","تقنية"],  
+["charcoal","فحم نباتي","🪵","مواد"],  
+  
+["angel","ملاك","👼","خيال"],  
+["demon","شيطان","😈","خيال"],  
+["shadow","ظل","👤","خيال"],  
+["prince","أمير","🤴","حياة"],  
+["king","ملك","👑","حياة"],  
+["queen","ملكة","👸","حياة"],  
+["summer","صيف","☀️","طبيعة"],  
+["winter","شتاء","❄️","طبيعة"],  
+["spring","ربيع","🌸","طبيعة"],  
+["autumn","خريف","🍂","طبيعة"],  
+  
+["poison","سم","☠️","مواد"],  
+["venom","سم زاحف","🧪","مواد"],  
+["mushroom","فطر","🍄","طبيعة"],  
+["cactus","صبار","🌵","طبيعة"],  
+["pig","خنزير","🐖","حيوانات"],  
+["sheep","خروف","🐑","حيوانات"],  
+["dolphin","دلفين","🐬","حيوانات"],  
+["whale","حوت","🐋","حيوانات"],  
+["owl","بومة","🦉","حيوانات"],  
+["wolf","ذئب","🐺","حيوانات"],  
+["dog","كلب","🐕","حيوانات"],  
+["cat","قط","🐈","حيوانات"],  
+["penguin","بطريق","🐧","حيوانات"],  
+["magic","سحر","✨","خيال"],  
+["wizard","ساحر","🧙","خيال"],  
+["potion","جرعة سحرية","🧪","خيال"],  
+["ghost","شبح","👻","خيال"],  
+["future","مستقبل","🔮","خيال"],  
+["time","زمن","⌛","خيال"],  
+["time_machine","آلة زمن","🕰️","خيال"],  
+["adventure","مغامرة","🧭","خيال"],  
+["knowledge","معرفة","🧠","حياة"],  
+["school","مدرسة","🏫","حياة"],  
+["university","جامعة","🎓","حياة"],  
+["hospital","مستشفى","🏥","حياة"],  
+["medicine","دواء","💊","حياة"],  
+["disease","مرض","🦠","حياة"],  
+["bacteria","بكتيريا","🦠","حياة"],  
+["virus","فيروس","🦠","حياة"],  
+["dna","حمض نووي","🧬","حياة"],  
+["atom","ذرة","⚛️","مواد"],  
+["molecule","جزيء","🔬","مواد"],  
+["electricity","كهرباء","⚡","تقنية"],  
+["sound","صوت","🔊","تقنية"],  
+["program","برنامج","💾","تقنية"],  
+["code","كود","💻","تقنية"],  
+["app","تطبيق","📱","تقنية"],  
+["social_network","شبكة اجتماعية","📱","تقنية"],  
+["message","رسالة","💬","تقنية"],  
+["newspaper","جريدة","📰","حياة"],  
+["story","قصة","📖","حياة"],  
+["translator","مترجم","🌐","حياة"],  
+["map","خريطة","🗺️","تقنية"],  
+["compass","بوصلة","🧭","تقنية"],  
+["treasure","كنز","💰","خيال"],  
+["kingdom","مملكة","🏰","خيال"],  
+["factory_core","قلب المصنع","🏭","تقنية"],  
+["robot_arm","ذراع آلي","🦾","تقنية"],  
+["electric_car","سيارة كهربائية","🚙","تقنية"],  
+["camera_phone","هاتف بكاميرا","📱","تقنية"],  
+["nebula_core","قلب السديم","🌌","فضاء"],  
+["reef","شعاب مرجانية","🪸","طبيعة"],  
+["pearl","لؤلؤة","🦪","مواد"],  
+["cement","إسمنت","🪨","مواد"],  
+["concrete","خرسانة","🏗️","مواد"],  
+["caramel","كراميل","🍮","طعام"],  
+["leaf","ورقة شجر","🍃","طبيعة"],  
+["raincoat","معطف مطر","🧥","حياة"],  
+["umbrella","مظلة","☂️","مواد"]  
+  
+];  
+  
+  
+/* =========================================================  
+   BUILD ELEMENT DATABASE  
+========================================================= */  
+  
+const byId = {};  
+  
+DATA.forEach((x,index)=>{  
+  byId[x[0]] = {  
+    id:x[0],  
+    name:x[1],  
+    icon:x[2],  
+    cat:x[3],  
+    index  
+  };  
+});  
+  
+  
+/* =========================================================  
+   RECIPES  
+========================================================= */  
+  
+const rawRecipes = [  
+  
+["fire","water","steam"],  
+["earth","water","mud"],  
+["fire","earth","lava"],  
+["air","fire","energy"],  
+["air","water","rain"],  
+["earth","earth","pressure"],  
+["lava","earth","volcano"],  
+["steam","air","cloud"],  
+["rain","cloud","storm"],  
+["lava","water","obsidian"],  
+["mud","fire","brick"],  
+["fire","fire","heat"],  
+["water","water","sea"],  
+["sea","sea","ocean"],  
+["pressure","earth","stone"],  
+["stone","fire","metal"],  
+["stone","air","sand"],  
+["sand","fire","glass"],  
+  
+["water","earth","river"],  
+["river","river","lake"],  
+["river","mountain","waterfall"],  
+["sea","earth","beach"],  
+["beach","sea","island"],  
+["sand","sand","desert"],  
+["desert","water","oasis"],  
+["plant","earth","tree"],  
+["tree","tree","forest"],  
+["forest","rain","rainforest"],  
+["tree","fire","wood"],  
+["wood","tool","paper"],  
+["paper","paper","book"],  
+["book","book","library"],  
+["plant","water","mushroom"],  
+["plant","earth","cactus"],  
+["plant","plant","garden"],  
+["garden","flower","park"],  
+["stone","stone","mountain"],  
+  
+["animal","earth","worm"],  
+["animal","air","bird"],  
+["bird","water","duck"],  
+["animal","water","fish"],  
+["fish","sea","shark"],  
+["animal","sea","octopus"],  
+["animal","sand","scorpion"],  
+["animal","water","frog"],  
+["animal","earth","snake"],  
+["snake","poison","venom"],  
+["animal","flower","bee"],  
+["bee","flower","honey"],  
+["animal","mud","pig"],  
+["animal","plant","sheep"],  
+["sheep","tool","wool"],  
+["wool","tool","cloth"],  
+["cloth","human","clothes"],  
+["animal","human","dog"],  
+["animal","human","cat"],  
+["animal","ice","penguin"],  
+["bird","night","owl"],  
+["animal","fire","wolf"],  
+["fish","water","dolphin"],  
+["fish","ocean","whale"],  
+  
+["human","human","family"],  
+["human","earth","farmer"],  
+["farmer","earth","field"],  
+["field","water","crop"],  
+["crop","heat","food"],  
+["human","fire","firefighter"],  
+["human","crime","police"],  
+["human","disease","doctor"],  
+["life","earth","human"],  
+["man","woman","love"],  
+["love","time","marriage"],  
+["marriage","house","family_home"],  
+["time","human","old_man"],  
+["house","house","city"],  
+["brick","brick","wall"],  
+["wall","wall","house"],  
+["house","house","metropolis"],  
+["house","stone","castle"],  
+["human","weapon","warrior"],  
+["warrior","horse","knight"],  
+["horse","monster","unicorn"],  
+["fire","bird","phoenix"],  
+["lizard","fire","dragon"],  
+  
+["metal","tool","hammer"],  
+["hammer","stone","statue"],  
+["metal","electricity","wire"],  
+["glass","electricity","lightbulb"],  
+["wire","lightbulb","lamp"],  
+["human","metal","robot"],  
+["robot","life","cyborg"],  
+["metal","fire","engine"],  
+["tool","stone","wheel"],  
+["engine","wheel","car"],  
+["car","engine","racecar"],  
+["car","air","airplane"],  
+["airplane","space","rocket"],  
+["computer","computer","internet"],  
+["internet","mobile","smartphone"],  
+["glass","computer","screen"],  
+["computer","game","video_game"],  
+["human","video_game","gamer"],  
+["metal","electricity","battery"],  
+["battery","electricity","charge"],  
+["glass","metal","mirror"],  
+["glass","tube","telescope"],  
+["telescope","space","planet"],  
+  
+["planet","sun","solar_system"],  
+["solar_system","solar_system","galaxy"],  
+["galaxy","galaxy","universe"],  
+["universe","universe","multiverse"],  
+["human","space","astronaut"],  
+["astronaut","rocket","space_station"],  
+["stone","space","meteor"],  
+["sun","moon","eclipse"],  
+["sun","rain","rainbow"],  
+["cloud","electricity","lightning"],  
+["lightning","fire","plasma"],  
+["wind","wind","tornado"],  
+["tornado","water","tsunami"],  
+["earth","motion","earthquake"],  
+["water","electricity","hydrogen"],  
+["air","electricity","ozone"],  
+["cloud","fog","fog"],  
+["fog","city","smog"],  
+  
+["fossil","pressure","oil"],  
+["oil","fire","gasoline"],  
+["gasoline","engine","motion"],  
+["motion","air","wind"],  
+["sand","glass","hourglass"],  
+["sand","glass","clock"],  
+["metal","clock","watch"],  
+["clock","sun","sundial"],  
+  
+["air","sound","music"],  
+["human","music","musician"],  
+["human","art","artist"],  
+["glass","paint","canvas"],  
+["wood","string","guitar"],  
+["metal","string","piano"],  
+  
+["campfire","meat","bbq"],  
+["pine_tree","lightbulb","xmas_tree"],  
+["plant","poison","weed"],  
+  
+["frog","magic","prince"],  
+["prince","castle","king"],  
+["king","woman","queen"],  
+["sun","heat","summer"],  
+["ice","cold","winter"],  
+["flower","wind","spring"],  
+["leaf","wind","autumn"],  
+  
+["milk","heat","cheese"],  
+["wheat","stone","flour"],  
+["flour","water","dough"],  
+["dough","fire","bread"],  
+["bread","fire","toast"],  
+["dough","cheese","pizza"],  
+["cow","farmer","milk"],  
+["cow","fire","meat"],  
+["meat","fire","steak"],  
+["meat","bread","burger"],  
+["bread","sausage","hotdog"],  
+["ice","cream","ice_cream"],  
+["crop","sun","wheat"],  
+["fruit","press","juice"],  
+["sugar","water","lemonade"],  
+["fruit","fire","jam"],  
+["tree","fruit","apple"],  
+["tree","sun","fruit"],  
+["sand","sea","salt"],  
+["sugar","heat","caramel"],  
+["coffee","water","tea"],  
+["cocoa","sugar","chocolate"],  
+["egg","flour","cake"],  
+["bread","meat","sandwich"],  
+["fish","rice","sushi"],  
+  
+["coral","sea","reef"],  
+["reef","shell","pearl"],  
+["volcano","air","volcanic_glass"],  
+["cement","water","concrete"],  
+["stone","cement","concrete"],  
+["concrete","motion","road"],  
+["road","road","bridge"],  
+["road","engine","train"],  
+["train","city","station"],  
+["metal","wheel","bicycle"],  
+["engine","bicycle","motorcycle"],  
+["metal","computer","camera"],  
+["camera","phone","camera_phone"],  
+["computer","screen","television"],  
+["air","sound","radio"],  
+["robot","drone","robot_arm"],  
+["robot","computer","code"],  
+["code","computer","program"],  
+["program","internet","social_network"],  
+["smartphone","internet","message"],  
+["message","paper","newspaper"],  
+["language","paper","story"],  
+["story","camera","movie"],  
+["language","human","translator"],  
+["map","earth","compass"],  
+["map","treasure","adventure"],  
+["gold","diamond","jewelry"],  
+["gold","stone","treasure"],  
+["king","castle","kingdom"],  
+  
+["star","star","nebula"],  
+["nebula","gravity","black_hole"],  
+["star","planet","alien"],  
+["rocket","spaceship","space_station"],  
+["spaceship","satellite","space_station"],  
+["black_hole","universe","future"],  
+["time","machine","time_machine"],  
+["time_machine","future","adventure"],  
+  
+["magic","life","angel"],  
+["magic","darkness","demon"],  
+["fire","darkness","shadow"],  
+["human","magic","wizard"],  
+["wizard","magic","potion"],  
+["monster","magic","ghost"],  
+["ghost","time","future"],  
+["wizard","book","knowledge"],  
+["knowledge","book","school"],  
+["school","knowledge","university"],  
+["university","computer","knowledge"],  
+["hospital","doctor","medicine"],  
+["medicine","disease","life"],  
+["bacteria","life","disease"],  
+["virus","disease","medicine"],  
+["dna","life","animal"],  
+["atom","atom","molecule"],  
+["molecule","life","dna"],  
+["hydrogen","oxygen","water"],  
+["energy","atom","quantum"],  
+  
+["fire","air","energy"],  
+["heat","water","steam"],  
+["cloud","water","rain"],  
+["rain","wind","storm"],  
+["fire","sand","glass"],  
+["lava","air","volcano"],  
+["stone","water","mud"],  
+["stone","heat","metal"],  
+["metal","heat","engine"],  
+["wood","fire","charcoal"],  
+["charcoal","pressure","coal"],  
+["coal","fire","diamond"],  
+["river","sea","ocean"],  
+["ocean","water","tsunami"],  
+["tree","rain","forest"],  
+["forest","water","rainforest"],  
+["flower","plant","garden"],  
+["garden","tree","park"],  
+["sand","wind","desert"],  
+["desert","tree","oasis"],  
+["oasis","water","island"],  
+["animal","plant","life"],  
+["life","water","fish"],  
+["fish","water","dolphin"],  
+["fish","ocean","whale"],  
+["bird","fire","phoenix"],  
+["animal","human","dog"],  
+["animal","human","cat"],  
+["animal","ice","penguin"],  
+["bee","honey","wax"],  
+["wheat","water","crop"],  
+["crop","fire","food"],  
+["food","bread","sandwich"],  
+["milk","sugar","ice_cream"],  
+["flour","sugar","cake"],  
+["flour","fire","bread"],  
+["meat","fire","bbq"],  
+["fish","fire","steak"],  
+["fruit","water","juice"],  
+["apple","fire","jam"],  
+["tree","flower","spring"],  
+["sun","plant","flower"],  
+["ice","air","snow"],  
+["snow","storm","blizzard"],  
+["cold","water","ice"],  
+["air","cold","snow"],  
+["wind","cloud","rain"],  
+["lightning","cloud","storm"],  
+["storm","water","tsunami"],  
+["earth","pressure","mountain"],  
+["mountain","water","waterfall"],  
+["waterfall","river","lake"],  
+["lake","sea","ocean"],  
+["sea","sand","beach"],  
+["beach","water","island"],  
+["metal","energy","electricity"],  
+["energy","metal","electricity"],  
+["electricity","wire","battery"],  
+["battery","wire","charge"],  
+["computer","electricity","internet"],  
+["screen","computer","television"],  
+["camera","computer","smartphone"],  
+["smartphone","internet","message"],  
+["internet","message","social_network"],  
+["program","computer","app"],  
+["app","internet","video_game"],  
+["video_game","internet","gamer"],  
+["engine","metal","factory"],  
+["factory","computer","robot"],  
+["car","battery","electric_car"],  
+["electric_car","computer","robot"],  
+["drone","camera","camera"],  
+["train","station","city"],  
+["bus","city","station"],  
+["bicycle","wheel","bicycle"],  
+["motorcycle","engine","motion"],  
+["boat","wood","ship"],  
+["ship","metal","submarine"],  
+["submarine","space","spaceship"],  
+["rocket","space","spaceship"],  
+["spaceship","computer","satellite"],  
+["satellite","space","telescope"],  
+["telescope","star","nebula"],  
+["star","space","planet"],  
+["planet","planet","solar_system"],  
+["galaxy","star","universe"],  
+["universe","black_hole","multiverse"],  
+["sun","star","solar_system"],  
+["moon","night","eclipse"],  
+["meteor","earth","mountain"],  
+["meteor","fire","lava"],  
+["space","energy","star"],  
+["magic","fire","plasma"],  
+["magic","water","potion"],  
+["potion","life","medicine"],  
+["angel","human","life"],  
+["demon","shadow","ghost"],  
+["ghost","human","story"],  
+["story","paper","book"],  
+["book","school","knowledge"],  
+["school","city","university"],  
+["university","knowledge","doctor"],  
+["doctor","hospital","medicine"],  
+["police","city","bank"],  
+["bank","money","market"],  
+["market","city","road"],  
+["road","stone","bridge"],  
+["bridge","river","road"],  
+["castle","king","kingdom"],  
+["kingdom","queen","family"],  
+["family","house","family_home"],  
+["love","human","family"],  
+["marriage","love","family"],  
+["warrior","sword","knight"],  
+["knight","castle","king"],  
+["prince","love","king"],  
+["queen","castle","kingdom"],  
+["gold","pressure","diamond"],  
+["diamond","gold","treasure"],  
+["treasure","map","adventure"],  
+["adventure","human","story"],  
+["music","human","artist"],  
+["artist","canvas","movie"],  
+["musician","music","song"],  
+["song","movie","movie"],  
+["radio","music","song"],  
+["camera","movie","television"],  
+["paper","book","library"],  
+["library","school","university"],  
+["newspaper","internet","social_network"],  
+["language","translator","message"],  
+["message","smartphone","social_network"],  
+["map","compass","adventure"],  
+["compass","earth","map"],  
+["time","clock","watch"],  
+["watch","sun","sundial"],  
+["hourglass","time","clock"],  
+["clock","metal","watch"],  
+["oil","metal","factory"],  
+["gasoline","car","motion"],  
+["motion","earth","earthquake"],  
+["motion","air","wind"],  
+["wind","fire","heat"],  
+["heat","sun","summer"],  
+["winter","ice","snow"],  
+["spring","flower","garden"],  
+["autumn","tree","leaf"],  
+["leaf","wind","autumn"],  
+["rain","umbrella","raincoat"],  
+["cloth","rain","raincoat"],  
+["wood","cloth","umbrella"],  
+["glass","metal","camera"],  
+["mirror","glass","screen"],  
+["screen","lightbulb","television"],  
+["metal","glass","camera"],  
+["stone","wood","tool"],  
+["tool","metal","hammer"],  
+["hammer","metal","sword"],  
+["sword","warrior","knight"]  
+  
+];  
+  
+  
+/* =========================================================  
+   ALIASES  
+========================================================= */  
+  
+const alias = {  
+  
+electricity:"energy",  
+space:"universe",  
+night:"shadow",  
+cold:"ice",  
+sound:"music",  
+art:"canvas",  
+paint:"canvas",  
+string:"guitar",  
+crime:"police",  
+poison_base:"poison",  
+tube:"glass",  
+mobile:"smartphone",  
+game:"video_game",  
+machine:"computer",  
+phone:"smartphone",  
+oxygen:"air",  
+gravity:"earth",  
+shell:"ocean",  
+rice:"wheat",  
+egg:"animal",  
+cocoa:"fruit",  
+leaf:"leaf",  
+darkness:"shadow",  
+seed:"plant",  
+cream:"milk",  
+dead:"fossil",  
+land:"earth",  
+female:"woman",  
+male:"man",  
+press:"juice",  
+life:"human",  
+weapon:"sword",  
+monster:"animal",  
+sausage:"meat",  
+coral:"stone",  
+wax:"cloth",  
+language:"book",  
+movie:"television",  
+song:"music",  
+bank:"gold",  
+money:"gold",  
+market:"city",  
+hacker:"computer",  
+quantum:"energy",  
+skyscraper:"metropolis",  
+xmas_tree:"pine_tree",  
+lizard:"animal"  
+};  
+  
+  
+/* =========================================================  
+   VALIDATE RECIPES  
+========================================================= */  
+  
+function normalize(id){  
+  return alias[id] || id;  
+}  
+  
+const recipeSet = new Set();  
+const RECIPES = [];  
+  
+rawRecipes.forEach(row=>{  
+  
+  let a = normalize(row[0]);  
+  let b = normalize(row[1]);  
+  let r = normalize(row[2]);  
+  
+  if(!byId[a] || !byId[b] || !byId[r]){  
+    return;  
+  }  
+  
+  let sorted = [a,b].sort();  
+  let key = sorted[0] + "+" + sorted[1] + "=" + r;  
+  
+  if(recipeSet.has(key)){  
+    return;  
+  }  
+  
+  recipeSet.add(key);  
+  
+  RECIPES.push({  
+    a:sorted[0],  
+    b:sorted[1],  
+    r  
+  });  
+  
+});  
+  
+  
+/* =========================================================  
+   RECIPE LOOKUP  
+========================================================= */  
+  
+const recipeMap = new Map();  
+  
+RECIPES.forEach(r=>{  
+  
+  const key = r.a + "+" + r.b;  
+  
+  if(!recipeMap.has(key)){  
+    recipeMap.set(key,r.r);  
+  }  
+  
+});  
+  
+  
+function findRecipe(a,b){  
+  
+  a = normalize(a);  
+  b = normalize(b);  
+  
+  const [x,y] = [a,b].sort();  
+  
+  return recipeMap.get(x+"+"+y) || null;  
+}  
+  
+  
+/* =========================================================  
+   GAME STATE  
+========================================================= */  
+  
+const SAVE_KEY = "element_lab_save_v4";  
+const THEME_KEY = "element_lab_theme_v4";  
+  
+let state = {  
+  
+  discovered:new Set([  
+    "fire",  
+    "water",  
+    "earth",  
+    "air"  
+  ]),  
+  
+  slots:[],  
+  
+  category:"الكل",  
+  
+  theme:localStorage.getItem(THEME_KEY) || "dark",  
+  
+  mapMode:"all",  
+  
+  selectedDetail:null  
+  
+};  
+  
+  
+/* =========================================================  
+   LOAD SAVE  
+========================================================= */  
+  
+try{  
+  
+  const saved = JSON.parse(  
+    localStorage.getItem(SAVE_KEY)  
+  );  
+  
+  if(  
+    saved &&  
+    Array.isArray(saved.discovered)  
+  ){  
+  
+    const valid = saved.discovered.filter(  
+      id=>byId[id]  
+    );  
+  
+    if(valid.length){  
+      state.discovered = new Set(valid);  
+    }  
+  
+  }  
+  
+}catch(e){  
+  
+  console.warn("تعذر تحميل الحفظ",e);  
+  
+}  
+  
+document.body.dataset.theme = state.theme;  
+  
+  
+/* =========================================================  
+   DOM  
+========================================================= */  
+  
+const $ = id => document.getElementById(id);  
+  
+const grid = $("grid");  
+const filters = $("filters");  
+const search = $("search");  
+  
+const slot1 = $("slot1");  
+const slot2 = $("slot2");  
+  
+const modal = $("modal");  
+  
+  
+/* =========================================================  
+   SAVE  
+========================================================= */  
+  
+function save(){  
+  
+  localStorage.setItem(  
+    SAVE_KEY,  
+    JSON.stringify({  
+      discovered:[...state.discovered]  
+    })  
+  );  
+  
+}  
+  
+  
+/* =========================================================  
+   PROGRESS  
+========================================================= */  
+  
+function updateProgress(){  
+  
+  const total = DATA.length;  
+  const discovered = state.discovered.size;  
+  
+  const percent = Math.round(  
+    discovered / total * 100  
+  );  
+  
+  $("discoveredCount").textContent = discovered;  
+  $("totalCount").textContent = total;  
+  
+  $("progressPercent").textContent =  
+    percent + "%";  
+  
+  $("progressBar").style.width =  
+    percent + "%";  
+  
+  $("mapDiscovered").textContent =  
+    discovered;  
+  
+}  
+  
+  
+/* =========================================================  
+   TOAST  
+========================================================= */  
+  
+let toastTimer;  
+  
+function toast(message){  
+  
+  const el = $("toast");  
+  
+  el.textContent = message;  
+  
+  el.classList.add("show");  
+  
+  clearTimeout(toastTimer);  
+  
+  toastTimer = setTimeout(()=>{  
+    el.classList.remove("show");  
+  },1800);  
+  
+}  
+  
+  
+/* =========================================================  
+   PAGE NAVIGATION  
+========================================================= */  
+  
+function openPage(page){  
+  
+  document  
+    .querySelectorAll(".page")  
+    .forEach(x=>x.classList.remove("active"));  
+  
+  page.classList.add("active");  
+  
+  if(page === $("mapPage")){  
+  
+    renderMap();  
+  
+    setTimeout(()=>{  
+      centerMap();  
+    },30);  
+  
+  }  
+  
+}  
+  
+  
+$("mapOpenBtn").onclick = ()=>{  
+  openPage($("mapPage"));  
+};  
+  
+  
+$("backBtn").onclick = ()=>{  
+  openPage($("labPage"));  
+};  
+  
+  
+/* =========================================================  
+   FILTERS  
+========================================================= */  
+  
+function renderFilters(){  
+  
+  filters.innerHTML = "";  
+  
+  categories.forEach(cat=>{  
+  
+    const btn =  
+      document.createElement("button");  
+  
+    btn.className =  
+      "filter " +  
+      (  
+        state.category === cat  
+        ?  
+        "active"  
+        :  
+        ""  
+      );  
+  
+    btn.textContent = cat;  
+  
+    btn.onclick = ()=>{  
+  
+      state.category = cat;  
+  
+      renderFilters();  
+      renderInventory();  
+  
+    };  
+  
+    filters.appendChild(btn);  
+  
+  });  
+  
+}  
+  
+  
+/* =========================================================  
+   INVENTORY  
+========================================================= */  
+  
+function renderInventory(){  
+  
+  grid.innerHTML = "";  
+  
+  const q =  
+    search.value.trim().toLowerCase();  
+  
+  let shown = 0;  
+  
+  DATA.forEach(row=>{  
+  
+    const e = byId[row[0]];  
+  
+    if(!state.discovered.has(e.id)){  
+      return;  
+    }  
+  
+    if(  
+      state.category !== "الكل" &&  
+      e.cat !== state.category  
+    ){  
+      return;  
+    }  
+  
+    if(  
+      q &&  
+      !e.name.toLowerCase().includes(q)  
+    ){  
+      return;  
+    }  
+  
+    shown++;  
+  
+    const card =  
+      document.createElement("button");  
+  
+    card.className = "elementCard";  
+  
+    card.innerHTML = `  
+      <span class="icon">${e.icon}</span>  
+      <span class="name">${e.name}</span>  
+      <span class="cat">${e.cat}</span>  
+    `;  
+  
+    card.onclick = ()=>{  
+      addToSlots(e.id);  
+    };  
+  
+    card.ondblclick = ()=>{  
+      showDetail(e.id);  
+    };  
+  
+    grid.appendChild(card);  
+  
+  });  
+  
+  $("empty").style.display =  
+    shown ? "none" : "block";  
+  
+  updateProgress();  
+  
+}  
+  
+  
+/* =========================================================  
+   SLOTS  
+========================================================= */  
+  
+function renderSlots(){  
+  
+  [slot1,slot2].forEach((slot,index)=>{  
+  
+    slot.innerHTML = "";  
+  
+    const id = state.slots[index];  
+  
+    if(!id){  
+  
+      slot.className = "slot";  
+  
+      slot.innerHTML = `  
+        <span style="font-size:28px;color:var(--muted)">+</span>  
+        <small style="color:var(--muted)">  
+          العنصر ${index+1}  
+        </small>  
+      `;  
+  
+      return;  
+  
+    }  
+  
+    const e = byId[id];  
+  
+    slot.className = "slot filled";  
+  
+    slot.innerHTML = `  
+      <button class="slotX">×</button>  
+      <div class="slotIcon">${e.icon}</div>  
+      <div class="slotName">${e.name}</div>  
+    `;  
+  
+    slot.querySelector(".slotX").onclick =  
+      ev=>{  
+        ev.stopPropagation();  
+  
+        state.slots.splice(index,1);  
+  
+        renderSlots();  
+      };  
+  
+  });  
+  
+}  
+  
+  
+function addToSlots(id){  
+  
+  if(!state.discovered.has(id)){  
+    return;  
+  }  
+  
+  if(state.slots.length >= 2){  
+  
+    toast("الخانتان ممتلئتان ❗");  
+  
+    return;  
+  }  
+  
+  state.slots.push(id);  
+  
+  renderSlots();  
+  
+  if(state.slots.length === 2){  
+  
+    setTimeout(()=>{  
+      $("combineBtn").focus();  
+    },50);  
+  
+  }  
+  
+}  
+  
+  
+/* =========================================================  
+   COMBINE  
+========================================================= */  
+  
+$("combineBtn").onclick = ()=>{  
+  
+  if(state.slots.length < 2){  
+  
+    toast("اختر عنصرين أولاً ✨");  
+  
+    return;  
+  }  
+  
+  const a = state.slots[0];  
+  const b = state.slots[1];  
+  
+  const result = findRecipe(a,b);  
+  
+  state.slots = [];  
+  
+  renderSlots();  
+  
+  if(!result){  
+  
+    toast("لا توجد وصفة لهذا الدمج ❌");  
+  
+    return;  
+  }  
+  
+  const element = byId[result];  
+  
+  const isNew =  
+    !state.discovered.has(result);  
+  
+  state.discovered.add(result);  
+  
+  save();  
+  
+  renderInventory();  
+  
+  renderMap();  
+  
+  updateProgress();  
+  
+  if(isNew){  
+  
+    showDetail(result,true);  
+  
+  }else{  
+  
+    toast(  
+      "تم الدمج: "+  
+      element.icon+  
+      " "+  
+      element.name  
+    );  
+  
+  }  
+  
+};  
+  
+  
+/* =========================================================  
+   DETAILS  
+========================================================= */  
+  
+function getRecipesFor(id){  
+  
+  return RECIPES.filter(  
+    r=>r.r===id  
+  );  
+  
+}  
+  
+  
+function showDetail(id,isNew=false){  
+  
+  const e = byId[id];  
+  
+  if(!e){  
+    return;  
+  }  
+  
+  state.selectedDetail = id;  
+  
+  $("detailIcon").textContent = e.icon;  
+  
+  $("detailName").textContent = e.name;  
+  
+  $("detailCat").textContent =  
+    e.cat +  
+    " • " +  
+    (  
+      state.discovered.has(id)  
+      ?  
+      "مكتشف ✓"  
+      :  
+      "مجهول"  
+    );  
+  
+  const list = getRecipesFor(id);  
+  
+  const box = $("recipes");  
+  
+  if(!list.length){  
+  
+    box.innerHTML = `  
+      <div class="recipe">  
+        ⭐ عنصر أساسي — لا توجد وصفة مطلوبة.  
+      </div>  
+    `;  
+  
+  }else{  
+  
+    box.innerHTML =  
+      list.slice(0,30)  
+      .map(r=>{  
+  
+        const a = byId[r.a];  
+        const b = byId[r.b];  
+  
+        return `  
+          <div class="recipe">  
+            ${a.icon} ${a.name}  
+            ＋  
+            ${b.icon} ${b.name}  
+            →  
+            <b>${e.icon} ${e.name}</b>  
+          </div>  
+        `;  
+  
+      })  
+      .join("");  
+  
+  }  
+  
+  modal.classList.add("show");  
+  
+  if(isNew){  
+  
+    setTimeout(()=>{  
+      toast(  
+        "🎉 اكتشاف جديد: "+  
+        e.icon+  
+        " "+  
+        e.name  
+      );  
+    },250);  
+  
+  }  
+  
+}  
+  
+  
+$("closeModal").onclick = ()=>{  
+  modal.classList.remove("show");  
+};  
+  
+  
+modal.onclick = e=>{  
+  if(e.target === modal){  
+    modal.classList.remove("show");  
+  }  
+};  
+  
+  
+$("useDetail").onclick = ()=>{  
+  
+  if(state.selectedDetail){  
+  
+    modal.classList.remove("show");  
+  
+    openPage($("labPage"));  
+  
+    addToSlots(state.selectedDetail);  
+  
+  }  
+  
+};  
+  
+  
+$("mapDetail").onclick = ()=>{  
+  
+  if(state.selectedDetail){  
+  
+    const id = state.selectedDetail;  
+  
+    modal.classList.remove("show");  
+  
+    openPage($("mapPage"));  
+  
+    setTimeout(()=>{  
+      focusNode(id);  
+    },100);  
+  
+  }  
+  
+};  
+  
+  
+/* =========================================================  
+   SEARCH  
+========================================================= */  
+  
+search.oninput = renderInventory;  
+  
+  
+/* =========================================================  
+   THEME  
+========================================================= */  
+  
+$("themeBtn").onclick = ()=>{  
+  
+  state.theme =  
+    state.theme === "dark"  
+    ?  
+    "light"  
+    :  
+    "dark";  
+  
+  document.body.dataset.theme =  
+    state.theme;  
+  
+  localStorage.setItem(  
+    THEME_KEY,  
+    state.theme  
+  );  
+  
+};  
+  
+  
+/* =========================================================  
+   RESET  
+========================================================= */  
+  
+$("resetBtn").onclick = ()=>{  
+  
+  const ok =  
+    confirm(  
+      "هل تريد حذف جميع الاكتشافات والبدء من جديد؟"  
+    );  
+  
+  if(!ok){  
+    return;  
+  }  
+  
+  state.discovered = new Set([  
+    "fire",  
+    "water",  
+    "earth",  
+    "air"  
+  ]);  
+  
+  state.slots = [];  
+  
+  save();  
+  
+  renderInventory();  
+  renderSlots();  
+  renderMap();  
+  updateProgress();  
+  
+  toast("تمت إعادة اللعبة 🔄");  
+  
+};  
+  
+  
+/* =========================================================  
+   MAP ENGINE  
+========================================================= */  
+  
+const world = $("world");  
+const svg = $("worldSvg");  
+const viewport = $("mapViewport");  
+  
+let mapScale = .55;  
+let mapX = -800;  
+let mapY = -450;  
+  
+let dragging = false;  
+let dragStartX = 0;  
+let dragStartY = 0;  
+let originalX = 0;  
+let originalY = 0;  
+  
+let pinchDistance = null;  
+  
+  
+/* =========================================================  
+   CALCULATE DEPTH  
+========================================================= */  
+  
+function calculateDepths(){  
+  
+  const depth = {  
+  
+    fire:0,  
+    water:0,  
+    earth:0,  
+    air:0  
+  
+  };  
+  
+  let changed = true;  
+  let guard = 0;  
+  
+  while(changed && guard < 100){  
+  
+    changed = false;  
+    guard++;  
+  
+    RECIPES.forEach(r=>{  
+  
+      if(  
+        depth[r.a] !== undefined &&  
+        depth[r.b] !== undefined  
+      ){  
+  
+        const nd =  
+          Math.max(  
+            depth[r.a],  
+            depth[r.b]  
+          ) + 1;  
+  
+        if(  
+          depth[r.r] === undefined ||  
+          nd < depth[r.r]  
+        ){  
+  
+          depth[r.r] = nd;  
+          changed = true;  
+  
+        }  
+  
+      }  
+  
+    });  
+  
+  }  
+  
+  return depth;  
+  
+}  
+  
+  
+const DEPTH = calculateDepths();  
+  
+  
+/* =========================================================  
+   BUILD MAP POSITIONS  
+========================================================= */  
+  
+function buildPositions(){  
+  
+  const positions = {};  
+  const buckets = {};  
+  
+  DATA.forEach(row=>{  
+  
+    const id = row[0];  
+    let depth = DEPTH[id];  
+  
+    if(depth === undefined){  
+      depth = 9;  
+    }  
+  
+    if(!buckets[depth]){  
+      buckets[depth] = [];  
+    }  
+  
+    buckets[depth].push(id);  
+  
+  });  
+  
+  
+  Object.keys(buckets)  
+    .sort((a,b)=>Number(a)-Number(b))  
+    .forEach(depthKey=>{  
+  
+      const list = buckets[depthKey];  
+      const depth = Number(depthKey);  
+      const columns = 5;  
+  
+      list.forEach((id,index)=>{  
+  
+        const col = index % columns;  
+        const row = Math.floor(index / columns);  
+        const wave = (row % 2) * 55;  
+  
+        positions[id] = {  
+          x: 100 + depth * 260,  
+          y: 100 + row * 150 + wave + col * 15  
+        };  
+  
+      });  
+  
+    });  
+  
+  positions.fire = { x:80, y:500 };  
+  positions.water = { x:80, y:650 };  
+  positions.earth = { x:80, y:800 };  
+  positions.air = { x:80, y:950 };  
+  
+  return positions;  
+  
+}  
+  
+  
+const POSITIONS = buildPositions();  
+  
+  
+/* =========================================================  
+   CREATE MAP NODE & RENDER MAP  
+========================================================= */  
+  
+function createMapNode(e){  
+  
+  const node = document.createElement("button");  
+  const discovered = state.discovered.has(e.id);  
+  
+  node.className =  
+    "mapNode " +  
+    (discovered ? "discovered " : "unknown ") +  
+    (e.index < 4 ? "basic" : "");  
+  
+  const p = POSITIONS[e.id] || { x:1500, y:1000 };  
+  
+  node.style.left = p.x + "px";  
+  node.style.top = p.y + "px";  
+  node.dataset.id = e.id;  
+  
+  node.innerHTML = `  
+    <span class="mapIcon">${discovered ? e.icon : "❓"}</span>  
+    <span class="mapName">${discovered ? e.name : "？？؟"}</span>  
+    <span class="mapDepth">${e.cat}</span>  
+  `;  
+  
+  node.onclick = ev => {  
+    ev.stopPropagation();  
+    if(discovered){  
+      showDetail(e.id);  
+    }else{  
+      toast("هذا العنصر غير مكتشف بعد 🔒");  
+    }  
+  };  
+  
+  return node;  
+}  
+  
+function updateWorldTransform(){  
+  world.style.transform = `translate(${mapX}px, ${mapY}px) scale(${mapScale})`;  
+}  
+  
+function renderMap(){  
+  world.querySelectorAll(".mapNode").forEach(n => n.remove());  
+  svg.innerHTML = "";  
+  
+  DATA.forEach(row => {  
+    const e = byId[row[0]];  
+    if(state.mapMode === "discovered" && !state.discovered.has(e.id)) return;  
+    world.appendChild(createMapNode(e));  
+  });  
+  
+  RECIPES.forEach(r => {  
+    const aDiscovered = state.discovered.has(r.a);  
+    const bDiscovered = state.discovered.has(r.b);  
+    const rDiscovered = state.discovered.has(r.r);  
+  
+    if(state.mapMode === "discovered" && !rDiscovered) return;  
+  
+    const posA = POSITIONS[r.a];  
+    const posB = POSITIONS[r.b];  
+    const posR = POSITIONS[r.r];  
+  
+    if(!posA || !posB || !posR) return;  
+  
+    const drawLine = (from, to, isKnown) => {  
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");  
+      line.setAttribute("x1", from.x + 58);  
+      line.setAttribute("y1", from.y + 42);  
+      line.setAttribute("x2", to.x + 58);  
+      line.setAttribute("y2", to.y + 42);  
+      line.setAttribute("class", "edge " + (isKnown ? "known" : "partial"));  
+      svg.appendChild(line);  
+    };  
+  
+    if(aDiscovered && rDiscovered) drawLine(posA, posR, true);  
+    if(bDiscovered && rDiscovered) drawLine(posB, posR, true);  
+  });  
+  
+  updateWorldTransform();  
+}  
+  
+function centerMap(){  
+  const rect = viewport.getBoundingClientRect();  
+  mapScale = 0.55;  
+  mapX = (rect.width / 2) - (1800 * mapScale);  
+  mapY = (rect.height / 2) - (1300 * mapScale);  
+  updateWorldTransform();  
+}  
+  
+function focusNode(id){  
+  const p = POSITIONS[id];  
+  if(!p) return;  
+  const rect = viewport.getBoundingClientRect();  
+  mapScale = 0.85;  
+  mapX = (rect.width / 2) - ((p.x + 58) * mapScale);  
+  mapY = (rect.height / 2) - ((p.y + 42) * mapScale);  
+  updateWorldTransform();  
+}  
+  
+/* =========================================================  
+   MAP CONTROLS & INTERACTION  
+========================================================= */  
+  
+$("zoomIn").onclick = () => { mapScale = Math.min(mapScale + 0.15, 1.8); updateWorldTransform(); };  
+$("zoomOut").onclick = () => { mapScale = Math.max(mapScale - 0.15, 0.25); updateWorldTransform(); };  
+$("centerMap").onclick = centerMap;  
+$("zoomReset").onclick = () => { mapScale = 1; updateWorldTransform(); };  
+  
+$("showDiscovered").onclick = () => {  
+  state.mapMode = state.mapMode === "all" ? "discovered" : "all";  
+  $("showDiscovered").style.background = state.mapMode === "discovered" ? "var(--accent)" : "var(--card)";  
+  renderMap();  
+  toast(state.mapMode === "discovered" ? "إظهار المكتشفات فقط 👁️" : "إظهار الكل 🌐");  
+};  
+  
+viewport.addEventListener("pointerdown", e => {  
+  if(e.target.closest("button")) return;  
+  dragging = true;  
+  dragStartX = e.clientX;  
+  dragStartY = e.clientY;  
+  originalX = mapX;  
+  originalY = mapY;  
+  viewport.setPointerCapture(e.pointerId);  
+});  
+  
+viewport.addEventListener("pointermove", e => {  
+  if(!dragging) return;  
+  mapX = originalX + (e.clientX - dragStartX);  
+  mapY = originalY + (e.clientY - dragStartY);  
+  updateWorldTransform();  
+});  
+  
+const endDrag = e => {  
+  if(dragging){  
+    dragging = false;  
+    try{ viewport.releasePointerCapture(e.pointerId); }catch(err){}  
+  }  
+};  
+viewport.addEventListener("pointerup", endDrag);  
+viewport.addEventListener("pointercancel", endDrag);  
+  
+viewport.addEventListener("wheel", e => {  
+  e.preventDefault();  
+  const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;  
+  mapScale = Math.min(Math.max(mapScale * zoomFactor, 0.25), 1.8);  
+  updateWorldTransform();  
+}, { passive: false });  
+  
+/* =========================================================  
+   INIT APP  
+========================================================= */  
+  
+renderFilters();  
+renderInventory();  
+renderSlots();  
+updateProgress();  
+  
+</script>  
+</body>  
+</html>
